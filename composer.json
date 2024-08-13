@@ -28,7 +28,8 @@
     "zoujingli/think-plugs-wemall": "^1.0|@dev",
     "zoujingli/think-plugs-account": "^1.0|@dev",
     "zoujingli/think-plugs-payment": "^1.0|@dev",
-    "zoujingli/think-plugs-wechat-service": "^1.0|@dev"
+    "zoujingli/think-plugs-wechat-service": "^1.0|@dev",
+    "fenglangyj/think-plugs-crud": "^1.0|@dev"
   },
   "repositories": [
     {
@@ -74,6 +75,10 @@
     {
       "type": "path",
       "url": "plugin/think-library"
+    },
+    {
+      "type": "path",
+      "url": "plugin/think-plugs-crud"
     }
   ],
   "minimum-stability": "dev",

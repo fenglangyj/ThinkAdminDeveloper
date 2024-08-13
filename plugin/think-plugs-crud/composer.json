@@ -1,0 +1,55 @@
+{
+  "type": "think-admin-plugin",
+  "name": "fenglangyj/think-plugs-crud",
+  "homepage": "https://thinkadmin.top",
+  "description": "CRUD Plugin for ThinkAdmin",
+  "authors": [
+    {
+      "name": "Anyon",
+      "email": "zoujingli@qq.com"
+    },
+    {
+      "name": "fengalngyj",
+      "email": "fengalngyj@139.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "files": [
+      "./src/helper.php"
+    ],
+    "psr-4": {
+      "plugin\\crud\\": "src"
+    }
+  },
+  "extra": {
+    "think": {
+      "services": [
+        "plugin\\crud\\Service"
+      ]
+    },
+    "config": {
+      "type": "module",
+      "name": "CRUD生成器",
+      "document": "https://thinkadmin.top/plugin/think-plugs-crud.html",
+      "description": "CRUD生成模块，提供简单的后端管理代码生成功能。",
+      "license": [
+        "VIP"
+      ]
+    },
+    "plugin": {
+      "copy": {
+        "stc/database": "database/migrations"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "allow-plugins": {
+      "zoujingli/think-install": true
+    }
+  }
+}

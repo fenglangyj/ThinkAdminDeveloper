@@ -1,40 +1,22 @@
 <?php
 
-// +----------------------------------------------------------------------
-// | WeMall Plugin for ThinkAdmin
-// +----------------------------------------------------------------------
-// | 版权所有 2022~2024 ThinkAdmin [ thinkadmin.top ]
-// +----------------------------------------------------------------------
-// | 官方网站: https://thinkadmin.top
-// +----------------------------------------------------------------------
-// | 免责声明 ( https://thinkadmin.top/disclaimer )
-// | 会员免费 ( https://thinkadmin.top/vip-introduce )
-// +----------------------------------------------------------------------
-// | gitee 代码仓库：https://gitee.com/zoujingli/think-plugs-wemall
-// | github 代码仓库：https://github.com/zoujingli/think-plugs-wemall
-// +----------------------------------------------------------------------
-
 declare (strict_types=1);
 
 namespace plugin\crud\command;
 
-use plugin\crud\model\PluginWemallOrder;
-use plugin\crud\model\PluginWemallOrderItem;
 use plugin\crud\service\CrudConfigService;
-use plugin\crud\service\UserAction;
-use plugin\crud\service\UserOrder;
 use think\admin\Command;
+use think\admin\Exception;
 use think\console\Input;
 use think\console\Output;
 
 /**
- * 商城订单自动清理
+ * CRUD批量生成服务
  * @class Clear
  * @package app\data\command
  */
 class Clear extends Command
 {
-
     /**
      *  当前配置参数
      * @var array
@@ -47,8 +29,8 @@ class Clear extends Command
      */
     protected function configure()
     {
-        $this->setName('xdata:mall:clear');
-        $this->setDescription('清理商城订单数据');
+        $this->setName('xdata:crud:run');
+        $this->setDescription('CRUD批量生成服务');
     }
 
     /**
@@ -56,21 +38,22 @@ class Clear extends Command
      * @param Input $input
      * @param Output $output
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     protected function execute(Input $input, Output $output)
     {
-        $this->config = CrudConfigService::get();
-        $this->_autoCancelOrder();
-        $this->_autoRemoveOrder();
-        $this->_autoConfirmOrder();
-        $this->_autoCommentOrder();
+        $this->config = CrudConfigService::get();//获取配置信息
+        //$this->_生成表();//生成表
+        //$this->_autoRemoveOrder();//生成模型
+        //$this->_autoCancelOrder();//生成控制器
+        //$this->_autoConfirmOrder();//生成视图
+        //$this->_autoCommentOrder();//生成api
     }
 
     /**
      * 取消30分钟未支付订单
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     private function _autoCancelOrder()
     {
@@ -99,7 +82,7 @@ class Clear extends Command
     /**
      * 清理已取消的订单
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     private function _autoRemoveOrder()
     {
@@ -116,8 +99,8 @@ class Clear extends Command
                 } else {
                     $this->queue->message($total, ++$count, "开始清理订单 {$order->getAttr('order_no')}");
                     $order->save([
-                        'status'         => 0,
-                        'deleted_time'   => date('Y-m-d H:i:s'),
+                        'status' => 0,
+                        'deleted_time' => date('Y-m-d H:i:s'),
                         'deleted_status' => 1,
                         'deleted_remark' => $remark,
                     ]);
@@ -134,7 +117,7 @@ class Clear extends Command
     /**
      * 自动完成订单评论
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     protected function _autoCommentOrder()
     {
@@ -161,7 +144,7 @@ class Clear extends Command
     /**
      * 自动完成签收订单
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     protected function _autoConfirmOrder()
     {

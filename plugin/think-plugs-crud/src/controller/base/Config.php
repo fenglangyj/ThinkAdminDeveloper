@@ -1,20 +1,5 @@
 <?php
 
-
-// +----------------------------------------------------------------------
-// | WeMall Plugin for ThinkAdmin
-// +----------------------------------------------------------------------
-// | 版权所有 2022~2024 ThinkAdmin [ thinkadmin.top ]
-// +----------------------------------------------------------------------
-// | 官方网站: https://thinkadmin.top
-// +----------------------------------------------------------------------
-// | 免责声明 ( https://thinkadmin.top/disclaimer )
-// | 会员免费 ( https://thinkadmin.top/vip-introduce )
-// +----------------------------------------------------------------------
-// | gitee 代码仓库：https://gitee.com/zoujingli/think-plugs-wemall
-// | github 代码仓库：https://github.com/zoujingli/think-plugs-wemall
-// +----------------------------------------------------------------------
-
 declare (strict_types=1);
 
 namespace plugin\crud\controller\base;
@@ -22,6 +7,7 @@ namespace plugin\crud\controller\base;
 use plugin\account\service\Account;
 use plugin\crud\service\CrudConfigService;
 use think\admin\Controller;
+use think\admin\Exception;
 
 /**
  * 应用参数配置
@@ -36,7 +22,7 @@ class Config extends Controller
      * @auth true
      * @menu true
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     public function index()
     {
@@ -50,7 +36,7 @@ class Config extends Controller
      * 修改参数配置
      * @auth true
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     public function params()
     {
@@ -68,7 +54,7 @@ class Config extends Controller
      * 修改订单配置
      * @auth true
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     public function order()
     {
@@ -79,7 +65,7 @@ class Config extends Controller
      * 修改协议内容
      * @auth true
      * @return void
-     * @throws \think\admin\Exception
+     * @throws Exception
      */
     public function content()
     {
